@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AllergyTranslator.Views.SettingPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <Grid Margin="15,10">
+            <!--#region grid defn-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <Label Text="{Binding PasswordUpdateDis}" VerticalOptions="Center" HorizontalTextAlignment="End" 
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="0"/>
+            <Entry IsPassword="True" Text="{Binding PasswordUpdate}" VerticalOptions="Center"  Grid.Column="1" Grid.Row="0"/>
+            <Label Text="{Binding PasseordErrorMessage}" Margin="0,0,5,0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                   TextColor="Red" VerticalTextAlignment="Center" IsVisible="{Binding ShowPasswordError}"/>
+
+            <Label Text="{Binding RecoveryUpdateDis}" VerticalOptions="Center" HorizontalTextAlignment="End" 
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="2"/>
+            <Entry Text="{Binding RecoveryUpdate}" VerticalOptions="Center"  Grid.Column="1" Grid.Row="2"/>
+
+            <Label Text="{Binding LanguageDisplayDis}" VerticalOptions="Center" HorizontalTextAlignment="End" 
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="3"/>
+            <Picker Title="{Binding LanguageDis}" ItemsSource="{Binding LanguageList}"
+                ItemDisplayBinding="{Binding Culture_Name}" VerticalOptions="Center"
+                Margin="0,0,5,0" Grid.Column="1" Grid.Row="3" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                Unfocused="LanguageChanged_Picker_Focused" IsEnabled="{Binding HasWIFI}"/>
+            <Label Text="No WIFI" TextColor="Red" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" IsVisible="{Binding WIFIMessage}"/>
+
+            <Grid Grid.Row="5" Grid.ColumnSpan="2"> <!--seperate grid for formatting-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                    <Label Text="{Binding ShowTACDis}" VerticalOptions="Center" HorizontalTextAlignment="End" 
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="0"/>
+                    <Switch IsToggled="{Binding TAC}" Grid.Column="1" Grid.Row="0" HorizontalOptions="Start"/>
+
+                    <Label Text="{Binding ShowWarningDis}" VerticalOptions="Center" HorizontalTextAlignment="End"
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="1"/>
+                <Switch IsToggled="{Binding WarningReset}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Start"/>
+
+                <Label Text="{Binding WordMatchDis}" VerticalOptions="Center" HorizontalTextAlignment="End" 
+                   Margin="0,0,5,0" Grid.Column="0" Grid.Row="2"/>
+                <Switch IsToggled="{Binding MatchFullWord}"  Grid.Column="1" Grid.Row="2" HorizontalOptions="Start"/>
+            </Grid>
+            <FlexLayout Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="0,5" Direction="Column" Wrap="Wrap" >
+                <Button Text="{Binding SaveChangesDis}" Command="{Binding SaveChanges}" Margin="0,0,5,10"/>
+                <Button Text="{Binding CancleChangesDis}" Command="{Binding ClearChanges}" VerticalOptions="Center"/>
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

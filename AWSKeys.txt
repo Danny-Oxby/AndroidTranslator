@@ -1,0 +1,14 @@
+THIS TEXT FILE IS NOT BEST PRACTICE, remove direc key references in code and text file when done
+
+User - aws-user
+Access key - AKIASEP7KVAXQDPLBZMW
+Secret access key - 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
+Copy				LePGKAMXS+Vemp+j/MSsmoahRQMLS4uGtiHOTaHt
+
+New Access Key after Security Breach
+Access key - AKIASEP7KVAX4R2W5THG
+Secret access key - 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
+Copy				Tmn45zW5eYnqUxWCUxymTAqPsuUZluTQitB2qgLQ
+
+Profile name - trans-default
+https://docs.aws.amazon.com/console/general/access-keys-best-practices

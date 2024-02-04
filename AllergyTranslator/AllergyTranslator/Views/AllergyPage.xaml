@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local ="clr-namespace:AllergyTranslator.ViewModels"
+             Title="{Binding Title}"
+             x:Class="AllergyTranslator.Views.AllergyPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding AddDis}" Command="{Binding AddNewItem}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="{StaticResource Accent}"
+             Command="{Binding RefreshCommand}">
+            <StackLayout>
+                <CollectionView Margin="5,15"
+                ItemsSource="{Binding AllergyList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label LineBreakMode="CharacterWrap" Text="{Binding Name}" Style="{StaticResource ItemHeader}" BackgroundColor="{Binding Colour}" 
+                                          VerticalTextAlignment="Center" HorizontalOptions="Fill" Grid.Column="0" Padding="5,0"/>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Column="1">
+                                    <Label Text="{Binding Source={RelativeSource 
+                                        AncestorType={x:Type local:AllergyPageViewModel}}, Path=SearchDis}" Style="{StaticResource ItemDescriptor}"/>
+                                    <Switch IsEnabled="False" IsToggled="{Binding Search}"/>
+                                </StackLayout>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource 
+                                        AncestorType={x:Type local:AllergyPageViewModel}}, Path=UpdateItem}"
+                                        CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                    <!--binding . passes the selected model to the command, ancestor is needed since its in a view
+                                        and it is bound the an item source thater than the context-->
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

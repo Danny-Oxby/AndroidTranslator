@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="AllergyTranslator.Views.LoginPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        
+        
+        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding PasswordDis}" Margin="0,0,15,0" VerticalTextAlignment="Center" Grid.Column="0"/>
+                <Entry Text="{Binding PasswordInput}" Placeholder="{Binding PasswordDis}" PlaceholderColor="Gray" 
+                       IsPassword="True" Grid.Column="1"/>
+            </Grid>
+            <Label Text="{Binding PasswordFailure}" Margin="0,0,5,0" TextColor="Red" VerticalTextAlignment="Center"/>
+
+            <Button VerticalOptions="Center" Text="{Binding LoginDis}" Command="{Binding LoginCommand}"/>
+            <Button VerticalOptions="Center" Text="{Binding NewUserDis}" Clicked="Button_Creat_User" Margin="0,5,0,0"/>
+            <Button VerticalOptions="Center" Text="{Binding PasswordRecoveryDis}" Clicked="Button_Send_Email"  Margin="0,5,0,0"/>
+
+            <Grid Margin="0,35,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Picker Title="{Binding LanguageDis}" ItemsSource="{Binding LanguageList}"
+                ItemDisplayBinding="{Binding Culture_Name}" HorizontalTextAlignment="Center"
+                Margin="15,0" Grid.Column="0" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                IsEnabled="{Binding HasWIFI}"/>
+                <Button Text="↻" Command="{Binding UpdateDisplayCommand}" Grid.Column="1" FontAttributes="Bold" Margin="5"
+                        FontSize="Large" IsEnabled="{Binding TranslationFinished}"/>
+            </Grid>
+            <Label Text="No WIFI" TextColor="Red" IsVisible="{Binding WIFIMessage}" Margin="15, 0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AllergyTranslator.Views.AboutPage"
+             Title="{Binding Title}">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height=".1*"/>
+
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="0" Grid.RowSpan="2" BorderColor="Gray" CornerRadius="10">
+            <Grid>
+                <Image Source="{Binding ImagePath}"
+                    IsVisible="{Binding DisplayImage}" Grid.Row="0"/>
+                <ScrollView Grid.Row="0" IsVisible="{Binding DisplayText}">
+                    <Label Text="{Binding TranslatedText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           FontSize="Large"/>
+                </ScrollView>
+            </Grid>
+        </Frame>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--These buttons bind to their opposite value, if text is showing enable image and disable text btn-->
+            <Button Text="{Binding ImageDis}" IsEnabled="{Binding DisplayText}" Command="{Binding ImageDisplay}" Grid.Column="0"/>
+            <Button Text=" ^ " Grid.Column="1" FontAttributes="Bold" FontSize="Large" Clicked="OpenSwipeView_Btn_Clicked"/>
+            <Button Text="{Binding TextDis}" IsEnabled="{Binding DisplayImage}" Command="{Binding TextDisplay}" Grid.Column="2"/>
+        </Grid>
+
+        <Button Margin="0,5,0,0" Text="{Binding TakePictureDis}" Grid.Row="3" HorizontalOptions="Center"
+            Clicked="TakePicture_Btn_Pressed" CornerRadius="360"
+            BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource Font}"/>
+        
+        <Grid x:Name="LanguageSelection" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Picker Title="{Binding LanguageDis}" ItemsSource="{Binding LanguageList}"
+                ItemDisplayBinding="{Binding Culture_Name}" HorizontalTextAlignment="Center"
+                Margin="15,0" Grid.Column="0" SelectedItem="{Binding FromSelectedLanguage, Mode=TwoWay}"
+                IsEnabled="{Binding HasWIFI}"/>
+            <Label Text=" -> " HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1"/>
+            <Picker Title="{Binding LanguageDis}" ItemsSource="{Binding LanguageList}"
+                ItemDisplayBinding="{Binding Culture_Name}" HorizontalTextAlignment="Center"
+                Margin="15,0" Grid.Column="2" SelectedItem="{Binding ToSelectedLanguage, Mode=TwoWay}"
+                IsEnabled="{Binding HasWIFI}"/>
+        </Grid>
+        <Label Text="No WIFI" TextColor="Red" IsVisible="{Binding WIFIMessage}" Grid.Row="5"/>
+
+        <Frame x:Name="SwipeView" Grid.Row="1" Grid.RowSpan="6" TranslationY="800" >
+            <StackLayout>
+                <Button Text=" ⌄ " Grid.Column="1" FontAttributes="Bold" FontSize="Large" Clicked="CloseSwipeView_Btn_Clicked"/>
+                <Label Text="{Binding NumberFoundText}" Style="{StaticResource ItemHeader}" HorizontalTextAlignment="Center"/>
+                <!--<ScrollView>-->
+                <CollectionView VerticalScrollBarVisibility="Always" ItemsSource="{Binding FoundAllergies}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Margin="15, 3" HorizontalTextAlignment="Center" Text="{Binding Name}" Style="{StaticResource ItemDescriptor}" BackgroundColor="{Binding Colour}"
+                                          VerticalTextAlignment="Center" HorizontalOptions="Fill"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <!--</ScrollView>-->
+            </StackLayout>
+
+            <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_Swiped"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+    </Grid>
+</ContentPage>

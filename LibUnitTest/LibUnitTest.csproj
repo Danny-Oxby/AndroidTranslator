@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\20Base.jpg" />
+    <None Remove="Images\20HC90Length.jpg" />
+    <None Remove="Images\EngImg.jpg" />
+    <None Remove="Images\EnglishImgShort.jpg" />
+    <None Remove="Images\FrenchImg.jpg" />
+    <None Remove="Images\GermanImg.jpg" />
+    <None Remove="Images\ItalianImg.jpg" />
+    <None Remove="Images\SpanishImg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\20Base.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\20HC90Length.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SpanishImg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\EngImg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\EnglishImgShort.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\FrenchImg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\GermanImg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ItalianImg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AllergyModelLibrary\AllergyModelLibrary.csproj" />
+    <ProjectReference Include="..\AllergyTranslator\AllergyTranslator\AllergyTranslator.csproj" />
+    <ProjectReference Include="..\OCRLibrary\OCRLibrary.csproj" />
+    <ProjectReference Include="..\SqlLibrary\SqlLibrary.csproj" />
+    <ProjectReference Include="..\TranslationLibrary\TranslationLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

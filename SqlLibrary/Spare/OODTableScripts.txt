@@ -1,0 +1,76 @@
+﻿Booleans dates are integers with binary check 
+and dates are strings, due to SQLites limited dataytypes
+
+CREATE TABLE "User" (
+	"User_ID"	INTEGER NOT NULL UNIQUE,
+	"Password"	TEXT NOT NULL,
+	PRIMARY KEY("User_ID" AUTOINCREMENT)
+);
+
+CREATE TABLE "Language" (
+	"Language_Id"	INTEGER,
+	"Full_Name"	TEXT NOT NULL UNIQUE,
+	"AWS_Name"	TEXT NOT NULL UNIQUE,
+	"Tesseract_Name"	TEXT NOT NULL UNIQUE,
+	PRIMARY KEY("Language_Id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Setting" (
+	"Setting_Id"	INTEGER,
+	"User_Id"	INTEGER NOT NULL,
+	"Language_Id"	INTEGER NOT NULL,
+	"Font_Type"	INTEGER NOT NULL DEFAULT 0,
+	"Font_Size"	INTEGER NOT NULL DEFAULT 18,
+	"Match_Full_Word"	INTEGER NOT NULL DEFAULT 0,
+	"Terms_And_Condition_Accepted"	INTEGER NOT NULL DEFAULT 0,
+	"Hide_Warning"	INTEGER NOT NULL DEFAULT 0,
+	FOREIGN KEY("User_Id") REFERENCES "User"("User_ID") ON DELETE CASCADE ON UPDATE NO ACTION,
+	FOREIGN KEY("Language_Id") REFERENCES "Language"("Language_Id") ON DELETE CASCADE ON UPDATE NO ACTION,
+	PRIMARY KEY("Setting_Id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Allergy" (
+	"Allergy_Name"	TEXT NOT NULL UNIQUE COLLATE NOCASE,
+	"User_Id"	INTEGER NOT NULL,
+	"Colour"	TEXT NOT NULL DEFAULT 'FFFFFF',
+	"Search"	INTEGER NOT NULL DEFAULT 1,
+	FOREIGN KEY("User_Id") REFERENCES "User"("User_ID") ON DELETE CASCADE ON UPDATE NO ACTION,
+	PRIMARY KEY("Allergy_Name")
+);
+
+CREATE TABLE "Issue_Type" (
+	"Issue_Type_Id"	INTEGER,
+	"Issue_Name"	TEXT NOT NULL DEFAULT 'Rename' UNIQUE,
+	PRIMARY KEY("Issue_Type_Id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Issue_Log" (
+	"Issue_Id"	INTEGER,
+	"User_Id"	INTEGER NOT NULL,
+	"Issue_Type_Id"	INTEGER NOT NULL,
+	"Method_Name"	TEXT,
+	"Issue_Date"	TEXT,
+	"Method_Params"	TEXT,
+	FOREIGN KEY("User_Id") REFERENCES "User"("User_ID") ON DELETE CASCADE ON UPDATE NO ACTION,
+	FOREIGN KEY("Issue_Type_Id") REFERENCES "Issue_Type"("Issue_Type_Id") ON DELETE SET NULL ON UPDATE NO ACTION,
+	PRIMARY KEY("Issue_Id" AUTOINCREMENT)
+);
+
+CREATE TABLE "Display_Text" (
+	"Field_Number"	INTEGER UNIQUE,
+	"User_Id"	INTEGER NOT NULL,
+	"Content"	TEXT NOT NULL,
+	FOREIGN KEY("User_Id") REFERENCES "User"("User_ID")  ON DELETE CASCADE ON UPDATE NO ACTION,
+	PRIMARY KEY("Field_Number")
+);
+
+INSERT INTO "main"."Allergy"
+("Allergy_Name", "User_Id", "Colour")
+VALUES ('wheat', 1, 'FF0000'),('nut', 1, '0000FF'),
+('soy', 1, '00FFFF'),('milk', 1, '00FF00'),('egg', 1, 'FFFF00');
+
+INSERT INTO "main"."Issue_Type"("Issue_Name") 
+VALUES ("Proformace"),("Translation"),("Image_Reading"),
+("Settings"),("Display"),("Usability"),("Other");
+
+INSERT OR IGNORE INTO Language (Full_Name, AWS_Name, Tesseract_Name) values("Eng", "abc", "def");

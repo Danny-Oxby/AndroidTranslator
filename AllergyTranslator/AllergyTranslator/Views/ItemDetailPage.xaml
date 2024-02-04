@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AllergyTranslator.Views.ItemDetailPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding DeleteDis}" Command="{Binding RemoveItem}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="{Binding AllergyDis}" Style="{StaticResource ItemHeader}" />
+            <Entry Text="{Binding AllergyName, Mode=TwoWay}" />
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding DisplayError}" TextColor="Red"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding SearchDis}" Style="{StaticResource ItemHeader}"/>
+                <Switch IsToggled="{Binding SearchBool}"/>
+            </StackLayout>
+            <Label Text="{Binding ColourDis}" Style="{StaticResource ItemHeader}"/>
+            <ListView ItemsSource="{Binding AllergyColour}" SelectedItem="{Binding SelectedColour, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Margin="15,3" Style="{StaticResource ItemDescriptor}" 
+                                       FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0"
+                                       BackgroundColor="{Binding ColourHex}"/>
+                                <!--<Ellipse BackgroundColor="{Binding ColourHex}" WidthRequest="15" HeightRequest="15" HorizontalOptions="End" Grid.Column="1"/>-->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="{Binding CancleDis}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="{Binding SaveDis}" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
