@@ -21,7 +21,7 @@ namespace TranslationLibrary
                 if (clientconnection == null)
                 {
                     //find a way to hid this infomrtion for secutiry reasons
-                    clientconnection = new AmazonTranslateClient("AKIASEP7KVAX4R2W5THG", "Tmn45zW5eYnqUxWCUxymTAqPsuUZluTQitB2qgLQ", Region);
+                    clientconnection = new AmazonTranslateClient("YOURAccessKey", "YOURSecreatKey", Region);
                 }
 
                 return clientconnection;
