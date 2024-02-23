@@ -1,4 +1,4 @@
-This repository is a cloned copy of my android mobile applcaition for my final year project. This copy has removed the brnaches and changed the AWS credentials for security purposes, as such it dosn't work outright in it's current state. To get the code to function you will need to place your own AWS credentials in the locations secified below.
+This repository is a cloned copy of my android mobile applcaition for my final year project. This copy has removed the branches and changed the AWS credentials for security purposes, as such it dosn't work outright in it's current state. To get the code to function you will need to place your own AWS credentials in the locations secified below.
 
 # FYProject
 This is the multilingual allergy searching and translation application for my 2023 final year project for Sheffield Hallam University, using Apache 2.0 and MIT licenses
